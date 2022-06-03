@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="dislay-6">Movimentações</h1>
+        <p class="lead1">Listagem das movimentações por correntista</p>
+        <hr class="my-2">
+        <div class="input-group">
+            <select id="iCorrentista" [(ngModel)]="correntista" class="form-select">
+                <option *ngFor="let c of correntistas" [ngValue]="c" >{{c.cpf}}-{{c.nome}}</option>
+            </select>
+            <button class="btn btn-primary me-md-4 btn-sm" type="button" (click)="listMovimentacoes()">Buscar</button>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary me-md-2" routerLink="/movimentacoes-new">Nova Movimentação</a>
+                <a class="btn btn-primary" routerLink="/correntistas">Correntistas</a>
+            </div>        
+        </div>
+   
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Data Hora</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of movimentacoes; index as i">
+            <th scope="row">{{i + 1 }}</th>
+            <td>{{item.dataHora | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td>{{item.descricao}}</td>
+            <td [ngStyle]="{'color':item.tipo === 'RECEITA' ? 'green' : 'red'}">{{item.valor | currency: 'BRL' }}</td>
+            <td>{{item.tipo}}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
